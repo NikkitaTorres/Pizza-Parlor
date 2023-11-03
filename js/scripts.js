@@ -3,7 +3,7 @@ function Pizza(pizzaSize, pizzaToppings) {
   this.pizzaToppings = pizzaToppings;
 }
 
-function calculateTotalCost(size, toppings) {
+Pizza.prototype.calculateTotalCost = function() {
   const sizePrices = {
     "Small ($3.00)": 3.00,
     "Medium ($5.00)": 5.00,
@@ -19,36 +19,33 @@ function calculateTotalCost(size, toppings) {
     sausage: 2.00,
   };
 
-  const sizeCost = sizePrices[size];
-  const toppingsCost = toppings.reduce((total, topping) => total + toppingPrices[topping], 0);
+  const sizeCost = sizePrices[this.pizzaSize];
+  const toppingsCost = this.pizzaToppings.reduce((total, topping) => total + toppingPrices[topping], 0);
   const totalCost = sizeCost + toppingsCost;
+
   return totalCost;
+};
+
+function updateTotalCost() {
+  const sizeSelect = document.getElementById("size");
+  const selectedSize = sizeSelect.value;
+  const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
+  const pizza = new Pizza(selectedSize, selectedToppings);
+  const totalCost = pizza.calculateTotalCost();
+  const totalCostElement = document.getElementById("total-cost");
+  totalCostElement.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   const sizeSelect = document.getElementById("size");
   const toppingsForm = document.getElementById("toppings");
-  const totalCostElement = document.getElementById("total-cost");
-  
-  let selectedSize = sizeSelect.value;
-  
-  sizeSelect.addEventListener("change", function () {
-    selectedSize = sizeSelect.value;
-    const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
-    const totalCost = calculateTotalCost(selectedSize, selectedToppings);
-    updateTotalCost(totalCost);
-  });
-  
-  toppingsForm.addEventListener("submit", function (event) {
-    event.preventDefault()
-    const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
-    const totalCost = calculateTotalCost(selectedSize, selectedToppings);
-    updateTotalCost(totalCost);
+
+  sizeSelect.addEventListener("change", updateTotalCost);
+  toppingsForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    updateTotalCost();
     document.querySelector("div#total-cost").removeAttribute("class");
   });
-  
-  function updateTotalCost(cost) {
-    console.log(`Cost: ${cost}`);
-    totalCostElement.textContent = `Total Cost: $${cost.toFixed(2)}`;
-  }
+
+  updateTotalCost();
 });
