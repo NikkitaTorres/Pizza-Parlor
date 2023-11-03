@@ -15,11 +15,11 @@ Expected Output: Result
 
 # Pizza-Parlor
 
-Written and produced by me, myself, and I, Nikkita Torres.
+Written and produced by Nikkita Torres.
 
 ## Description
 
-This is a project for creating a programming language suggestor. The purpose of this project is to match an individual who is interested in starting a programming language with a language to start with.
+This is a project that allows users to create their own pizza and get a cost of that pizza returned to them. The user can select a single size, and multiple toppings, which will result in different prices.
 
 ## Technologies Used:
 
