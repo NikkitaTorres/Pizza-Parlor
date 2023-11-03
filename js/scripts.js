@@ -11,11 +11,46 @@ function calculateTotalCost(size, toppings) {
     "Xtra-Large ($10.00)": 10.00,
   };
 
+  const toppingPrices = {
+    cheese: 1.50,
+    pepperoni: 1.00,
+    jalapeno: 0.50,
+    anchovie: 1.00,
+    sausage: 2.00,
+  };
+
   const sizeCost = sizePrices[size];
-
-  const toppingsCost = toppings.length;
-
+  const toppingsCost = toppings.reduce((total, topping) => total + toppingPrices[topping], 0);
   const totalCost = sizeCost + toppingsCost;
-
   return totalCost;
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+const sizeForm = document.querySelector("form");
+const toppingsForm = document.getElementById("toppings");
+const totalCostElement = document.getElementById("total-cost");
+
+let selectedSize;
+
+sizeForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const sizeSelect = document.getElementById("size");
+  selectedSize = sizeSelect.value;
+  updateTotalCost(selectedSize);
+});
+
+toppingsForm.addEventListener("click", function (event) {
+  const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
+  const totalCost = calculateTotalCost(selectedSize, selectedToppings);
+  updateTotalCost(totalCost);
+});
+
+function updateTotalCost(cost) {
+  // Check if cost is a number
+  if (typeof cost === 'number') {
+    totalCostElement.textContent = `Total Cost: $${cost.toFixed(2)}`;
+  } else {
+    totalCostElement.textContent = 'Invalid cost';
+  }
+}
+});
