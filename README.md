@@ -45,9 +45,7 @@ If you experience any other issues or notice anything that could be changed for 
 
 ## Image Credits
 
-[Banner Image](https://www.istockphoto.com/photo/abstract-futuristic-binary-background-for-hackathon-and-other-digital-events-gm1541470416-525793658) by ebrublue10 on istockphoto.com
-
-[Background Image](https://www.istockphoto.com/vector/abstract-futuristic-cyberspace-with-binary-code-matrix-background-with-digits-well-gm865457032-143700189?phrase=hacker+background&searchscope=image%2Cfilm) by ValeryBrozhinsky on istockphoto.com.
+[Background Image](https://www.istockphoto.com/photo/concept-promotional-flyer-and-poster-for-restaurants-or-pizzerias-template-with-gm943449226-257775492?phrase=pizza) by Radionphoto on istockphoto.com.
 
 ## License
 
