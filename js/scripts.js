@@ -43,29 +43,28 @@ function displayPizzas() {
   pizzas.forEach((pizza, index) => {
     const pizzaItem = document.createElement("div");
     pizzaItem.textContent = `Pizza ${index + 1}: Size - ${pizza.pizzaSize}, Toppings - ${pizza.pizzaToppings.join(", ")}, Price - $${pizza.totalCost.toFixed(2)}`;
-    pizzaItem.addEventListener("click", () => alert(`Details for Pizza ${index + 1}:\n${pizzaItem.textContent}`));
     pizzaList.appendChild(pizzaItem);
   });
 }
 
 function updateTotalCost() {
- 
   const totalCostElement = document.getElementById("total-cost");
-  
+
   const totalCost = pizzas.reduce((total, pizza) => total + pizza.totalCost, 0);
-  
+
   totalCostElement.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
-  
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   const sizeSelect = document.getElementById("size");
   const toppingsForm = document.getElementById("toppings");
-
+  const sizeForm = document.querySelector("form");
   toppingsForm.addEventListener("submit", function(event) {
     event.preventDefault();
     const selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text; // Get the selected size text
     const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
     addPizzaToOrder(selectedSize, selectedToppings);
+    sizeForm.reset();
+    toppingsForm.reset();
   });
 });
