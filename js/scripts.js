@@ -26,31 +26,24 @@ function calculateTotalCost(size, toppings) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-const sizeForm = document.querySelector("form");
+const sizeSelect = document.getElementById("size");
 const toppingsForm = document.getElementById("toppings");
 const totalCostElement = document.getElementById("total-cost");
 
-let selectedSize;
+let selectedSize = sizeSelect.value;
 
-sizeForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const sizeSelect = document.getElementById("size");
+sizeSelect.addEventListener("change", function () {
   selectedSize = sizeSelect.value;
   updateTotalCost(selectedSize);
 });
 
-toppingsForm.addEventListener("click", function (event) {
+toppingsForm.addEventListener("click", function () {
   const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
   const totalCost = calculateTotalCost(selectedSize, selectedToppings);
   updateTotalCost(totalCost);
 });
 
 function updateTotalCost(cost) {
-  // Check if cost is a number
-  if (typeof cost === 'number') {
-    totalCostElement.textContent = `Total Cost: $${cost.toFixed(2)}`;
-  } else {
-    totalCostElement.textContent = 'Invalid cost';
-  }
+  totalCostElement.textContent = `Total Cost: $${cost.toFixed(2)}`;
 }
 });
