@@ -49,9 +49,7 @@ function displayPizzas() {
 
 function updateTotalCost() {
   const totalCostElement = document.getElementById("total-cost");
-
   const totalCost = pizzas.reduce((total, pizza) => total + pizza.totalCost, 0);
-
   totalCostElement.textContent = `Total Cost: $${totalCost.toFixed(2)}`;
 }
 
@@ -59,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const sizeSelect = document.getElementById("size");
   const toppingsForm = document.getElementById("toppings");
   const sizeForm = document.querySelector("form");
+
   toppingsForm.addEventListener("submit", function(event) {
     event.preventDefault();
     document.querySelector("div#total-cost").removeAttribute("class")
