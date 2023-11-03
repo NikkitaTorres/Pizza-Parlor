@@ -61,7 +61,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const sizeForm = document.querySelector("form");
   toppingsForm.addEventListener("submit", function(event) {
     event.preventDefault();
-    const selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text; // Get the selected size text
+    document.querySelector("div#total-cost").removeAttribute("class")
+    const selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text;
     const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
     addPizzaToOrder(selectedSize, selectedToppings);
     sizeForm.reset();
