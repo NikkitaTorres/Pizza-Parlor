@@ -30,21 +30,21 @@ document.addEventListener("DOMContentLoaded", function() {
   const toppingsForm = document.getElementById("toppings");
   const totalCostElement = document.getElementById("total-cost");
   
-  let selectedSize = sizeSelect.value; // Initialize with the default value
+  let selectedSize = sizeSelect.value;
   
   sizeSelect.addEventListener("change", function () {
     selectedSize = sizeSelect.value;
-    console.log(`Selected Size: ${selectedSize}`);
     const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
     const totalCost = calculateTotalCost(selectedSize, selectedToppings);
-    console.log(`Total Cost: ${totalCost}`);
     updateTotalCost(totalCost);
   });
   
-  toppingsForm.addEventListener("click", function () {
+  toppingsForm.addEventListener("submit", function (event) {
+    event.preventDefault()
     const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
     const totalCost = calculateTotalCost(selectedSize, selectedToppings);
     updateTotalCost(totalCost);
+    document.querySelector("div#total-cost").removeAttribute("class");
   });
   
   function updateTotalCost(cost) {
