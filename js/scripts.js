@@ -26,24 +26,29 @@ function calculateTotalCost(size, toppings) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-const sizeSelect = document.getElementById("size");
-const toppingsForm = document.getElementById("toppings");
-const totalCostElement = document.getElementById("total-cost");
-
-let selectedSize = sizeSelect.value;
-
-sizeSelect.addEventListener("change", function () {
-  selectedSize = sizeSelect.value;
-  updateTotalCost(selectedSize);
-});
-
-toppingsForm.addEventListener("click", function () {
-  const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
-  const totalCost = calculateTotalCost(selectedSize, selectedToppings);
-  updateTotalCost(totalCost);
-});
-
-function updateTotalCost(cost) {
-  totalCostElement.textContent = `Total Cost: $${cost.toFixed(2)}`;
-}
+  const sizeSelect = document.getElementById("size");
+  const toppingsForm = document.getElementById("toppings");
+  const totalCostElement = document.getElementById("total-cost");
+  
+  let selectedSize = sizeSelect.value; // Initialize with the default value
+  
+  sizeSelect.addEventListener("change", function () {
+    selectedSize = sizeSelect.value;
+    console.log(`Selected Size: ${selectedSize}`);
+    const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
+    const totalCost = calculateTotalCost(selectedSize, selectedToppings);
+    console.log(`Total Cost: ${totalCost}`);
+    updateTotalCost(totalCost);
+  });
+  
+  toppingsForm.addEventListener("click", function () {
+    const selectedToppings = Array.from(document.querySelectorAll('input[name="pizza-topping"]:checked')).map(input => input.value);
+    const totalCost = calculateTotalCost(selectedSize, selectedToppings);
+    updateTotalCost(totalCost);
+  });
+  
+  function updateTotalCost(cost) {
+    console.log(`Cost: ${cost}`);
+    totalCostElement.textContent = `Total Cost: $${cost.toFixed(2)}`;
+  }
 });
